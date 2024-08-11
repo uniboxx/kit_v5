@@ -1,14 +1,20 @@
 <script>
-  import base from './base';
+  // import base from './base';
+  import { resolveRoute } from '$app/paths';
 </script>
 
 <h1>Titolo della Pagina</h1>
 <nav>
   <ul>
-    <li><a href="{base}/">Home</a></li>
+    <!-- <li><a href="{base}/">Home</a></li>
     <li><a href="{base}/about">About</a></li>
     <li><a href="{base}/contact">Contact</a></li>
-    <li><a href="{base}/more">More</a></li>
+    <li><a href="{base}/more">More</a></li> -->
+
+    <li><a href="{resolveRoute('/')}">Home</a></li>
+    <!-- <li><a href="{base}/about">About</a></li>
+    <li><a href="{base}/contact">Contact</a></li>
+    <li><a href="{base}/more">More</a></li> -->
   </ul>
 </nav>
 
