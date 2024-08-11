@@ -8,10 +8,12 @@
   <header id="header">
     <Header />
   </header>
-  <main id="main">
-    <slot />
-  </main>
-  <Footer />
+
+  <main id="main"><slot /></main>
+
+  <footer id="footer">
+    <Footer />
+  </footer>
 </div>
 
 <style lang="scss">
@@ -19,11 +21,25 @@
     min-height: 100svh;
     display: grid;
     grid-template-rows: min-content 1fr min-content;
-    padding: 1rem 0.5rem;
+    & > * {
+      padding: 1rem 0.5rem;
+    }
+  }
+
+  #header,
+  #footer {
+    background-color: #ccc;
   }
 
   #main {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    color: #ccc;
+  }
+
+  #footer {
+    padding: 2rem 0.5rem;
   }
 </style>
