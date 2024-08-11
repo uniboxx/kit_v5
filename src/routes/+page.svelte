@@ -79,5 +79,8 @@
   img {
     width: auto;
     height: 300px;
+    border-radius: 10px;
+    outline: 3px solid goldenrod;
+    outline-offset: 5px;
   }
 </style>
