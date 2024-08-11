@@ -1,22 +1,50 @@
 <script>
   let counter = $state(0);
+
+  const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+
+  async function getCat() {
+    try {
+      const res = await fetch(apiUrl);
+      if (!res.ok) return;
+      const data = await res.json();
+      const catUrl = data[0].url;
+
+      return catUrl;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 </script>
 
 <h1>Home Page on /</h1>
 <section id="counter">
-  <button onclick="{() => counter--}">➖</button>
+  <button
+    class="btn-counter"
+    onclick="{() => counter--}"
+    disabled="{counter === 10}">➖</button>
   {#if counter < 10}
-    <p>Count {counter}</p>
+    <p>Click to get a cat {counter}</p>
   {:else}
-    <p>Finish</p>
+    <button id="restart" onclick="{() => (counter = 0)}">Restart</button>
   {/if}
-  <button onclick="{() => counter++}">➕</button>
+  <button
+    class="btn-counter"
+    onclick="{() => counter++}"
+    disabled="{counter === 10}">➕</button>
 </section>
+
 {#if counter < 10}
   <progress type="progress" value="{counter}" max="10"
     >{counter * 10}%</progress>
 {:else}
-  <button id="reset" onclick="{(counter = 0)}">Reset</button>
+  {#await getCat()}
+    <p>Loading cat...</p>
+  {:then catUrl}
+    <img src="{catUrl}" alt="Nice cat" />
+  {:catch error}
+    <p style="color:red;">{error.message}</p>
+  {/await}
 {/if}
 
 <style lang="scss">
@@ -26,8 +54,11 @@
     gap: 2rem;
     padding: 2rem;
     font-size: 2rem;
-    & button {
+    & .btn-counter {
       font-size: inherit;
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
     & p {
       text-align: center;
@@ -37,11 +68,16 @@
     display: block;
   }
 
-  #reset {
+  #restart {
     padding: 0.5rem 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     background-color: lightgreen;
     border-radius: 10px;
     color: #333;
+  }
+
+  img {
+    width: auto;
+    height: 300px;
   }
 </style>
