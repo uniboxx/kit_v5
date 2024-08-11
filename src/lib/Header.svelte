@@ -1,5 +1,5 @@
 <script>
-  import { base } from 'app/paths';
+  import base from './base';
 </script>
 
 <h1>Titolo della Pagina</h1>
