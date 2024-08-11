@@ -6,15 +6,10 @@
 <h1>Titolo della Pagina</h1>
 <nav>
   <ul>
-    <!-- <li><a href="{base}/">Home</a></li>
-    <li><a href="{base}/about">About</a></li>
-    <li><a href="{base}/contact">Contact</a></li>
-    <li><a href="{base}/more">More</a></li> -->
-
     <li><a href="{resolveRoute('/')}">Home</a></li>
-    <!-- <li><a href="{base}/about">About</a></li>
-    <li><a href="{base}/contact">Contact</a></li>
-    <li><a href="{base}/more">More</a></li> -->
+    <li><a href="{resolveRoute('/about')}">About</a></li>
+    <li><a href="{resolveRoute('/contact')}">Contact</a></li>
+    <li><a href="{resolveRoute('/more')}">More</a></li>
   </ul>
 </nav>
 
