@@ -11,5 +11,6 @@
   }
   i {
     font-size: 2rem;
+    color: azure;
   }
 </style>
