@@ -31,10 +31,7 @@
   {#if counter < 100}
     <p>Click to get a cat {counter}%</p>
   {:else}
-    <button
-      id="restart"
-      onclick="{() => (counter = 0)}"
-      disabled="{counter === 100}">Restart</button>
+    <button id="restart" onclick="{() => (counter = 0)}">Restart</button>
   {/if}
   <button
     class="btn-counter"
@@ -107,9 +104,5 @@
     outline: 3px solid goldenrod;
     outline-offset: 5px;
     margin-top: 1rem;
-    /* @media screen and (max-width: 640px) {
-      width: 92svw;
-      height: auto;
-    } */
   }
 </style>
