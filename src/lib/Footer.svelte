@@ -1,1 +1,8 @@
-<h1>Footer</h1>
+<h1>By Unibox</h1>
+
+<style lang="scss">
+  h1 {
+    text-align: end;
+    padding-right: 1rem;
+  }
+</style>

@@ -1,7 +1,9 @@
 <script>
+  import Spinner from '../lib/Spinner.svelte';
+
   let counter = $state(0);
 
-  const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+  const apiUrl = 'https://api.thecatapi.com/v1/images/search?size=small';
 
   async function getCat() {
     try {
@@ -9,7 +11,7 @@
       if (!res.ok) return;
       const data = await res.json();
       const catUrl = data[0].url;
-
+      console.log(data);
       return catUrl;
     } catch (err) {
       console.error(err);
@@ -21,28 +23,29 @@
 <section id="counter">
   <button
     class="btn-counter"
-    onclick="{() => counter--}"
-    disabled="{counter === 10}">➖</button>
-  {#if counter < 10}
-    <p>Click to get a cat {counter}</p>
+    onclick="{() => (counter -= 10)}"
+    disabled="{counter === 0 || counter === 100}">➖</button>
+  {#if counter < 100}
+    <p>Click to get a cat {counter}%</p>
   {:else}
     <button id="restart" onclick="{() => (counter = 0)}">Restart</button>
   {/if}
   <button
     class="btn-counter"
-    onclick="{() => counter++}"
-    disabled="{counter === 10}">➕</button>
+    onclick="{() => (counter += 10)}"
+    disabled="{counter === 100}">➕</button>
 </section>
 
-{#if counter < 10}
-  <progress type="progress" value="{counter}" max="10"
-    >{counter * 10}%</progress>
+{#if counter < 100}
+  <div id="progress-container">
+    <div id="progress-bar" style="width:{counter}%"></div>
+  </div>
 {:else}
   {#await getCat()}
-    <p>Loading cat...</p>
+    <Spinner />
   {:then catUrl}
-    <div id="catImage">
-      <img src="{catUrl}" alt="Nice cat" />
+    <div>
+      <img id="catImage" src="{catUrl}" alt="Nice cat" />
     </div>
   {:catch error}
     <p style="color:red;">{error.message}</p>
@@ -66,8 +69,20 @@
       text-align: center;
     }
   }
-  progress {
-    display: block;
+  #progress-container {
+    border: 1px solid gray;
+    width: 15rem;
+    height: 1.5rem;
+    line-height: 1.4;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  #progress-bar {
+    background-color: lightgreen;
+    height: 100%;
+    transition: 0.3s;
+    border-radius: 10px;
   }
 
   #restart {
@@ -79,20 +94,16 @@
   }
 
   #catImage {
-    width: auto;
-    height: 300px;
+    max-width: 400px;
+    width: 92svw;
+    height: auto;
     border-radius: 10px;
     outline: 3px solid goldenrod;
     outline-offset: 5px;
     margin-top: 3rem;
-    @media screen and (max-width: 400px) {
+    /* @media screen and (max-width: 640px) {
       width: 92svw;
       height: auto;
-    }
-    & img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
+    } */
   }
 </style>
