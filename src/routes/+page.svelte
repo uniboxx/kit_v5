@@ -4,6 +4,8 @@
   let counter = $state(0);
 
   const apiUrl = 'https://api.thecatapi.com/v1/images/search?size=small';
+  const tumblr =
+    'https://25.media.tumblr.com/tumblr_m1omvlbVGd1qze0hyo1_250.jpg';
 
   async function getCat() {
     try {
@@ -11,7 +13,8 @@
       if (!res.ok) return;
       const data = await res.json();
       const catUrl = data[0].url;
-      console.log(data);
+      if (catUrl === tumblr) return getCat();
+      // console.log(data);
       return catUrl;
     } catch (err) {
       console.error(err);
@@ -28,7 +31,10 @@
   {#if counter < 100}
     <p>Click to get a cat {counter}%</p>
   {:else}
-    <button id="restart" onclick="{() => (counter = 0)}">Restart</button>
+    <button
+      id="restart"
+      onclick="{() => (counter = 0)}"
+      disabled="{counter === 100}">Restart</button>
   {/if}
   <button
     class="btn-counter"
