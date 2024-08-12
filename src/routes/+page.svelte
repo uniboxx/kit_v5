@@ -100,7 +100,7 @@
     border-radius: 10px;
     outline: 3px solid goldenrod;
     outline-offset: 5px;
-    margin-top: 3rem;
+    margin-top: 1rem;
     /* @media screen and (max-width: 640px) {
       width: 92svw;
       height: auto;
