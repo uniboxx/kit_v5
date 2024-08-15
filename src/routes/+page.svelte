@@ -41,7 +41,9 @@
   {#await getCat()}
     <p>Loading cat...</p>
   {:then catUrl}
-    <img src="{catUrl}" alt="Nice cat" />
+    <div id="catImage">
+      <img src="{catUrl}" alt="Nice cat" />
+    </div>
   {:catch error}
     <p style="color:red;">{error.message}</p>
   {/await}
@@ -76,11 +78,21 @@
     color: #333;
   }
 
-  img {
+  #catImage {
     width: auto;
     height: 300px;
     border-radius: 10px;
     outline: 3px solid goldenrod;
     outline-offset: 5px;
+    margin-top: 3rem;
+    @media screen and (max-width: 400px) {
+      width: 92svw;
+      height: auto;
+    }
+    & img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
   }
 </style>
